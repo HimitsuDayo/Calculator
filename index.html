@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tax Calcu</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="panel">
+      <div class="input-group">
+        <label for="salary">Monthly Salary</label>
+        <input type="number" id="salary" placeholder="PHP 0.00" />
+      </div>
+
+      <div class="flex-row">
+        <div class="column">
+          <h3>Contributions</h3>
+          <label>SSS</label>
+          <input type="number" id="sss" placeholder="PHP 0.00" />
+          <label>Philhealth</label>
+          <input type="number" id="philhealth" placeholder="PHP 0.00" />
+          <label>Pagibig</label>
+          <input type="number" id="pagibig" placeholder="PHP 0.00" />
+          <label>Total</label>
+          <input type="number" id="totalContributions" placeholder="PHP 0.00" disabled />
+        </div>
+
+        <div class="column">
+          <h3>Tax Computation</h3>
+          <label>Taxable Income</label>
+          <div class="tax-box">
+            <strong id="taxableIncome">0.00</strong>
+          </div>
+          <button class="calc-btn" onclick="calculateTax()">Calculate</button>
+          <button class="calc-btn" onclick="clearForm()">Clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function calculateTax() {
+      const salary = parseFloat(document.getElementById("salary").value) || 0;
+      const sss = parseFloat(document.getElementById("sss").value) || 0;
+      const philhealth = parseFloat(document.getElementById("philhealth").value) || 0;
+      const pagibig = parseFloat(document.getElementById("pagibig").value) || 0;
+
+      const totalContributions = sss + philhealth + pagibig;
+      const taxableIncome = salary - totalContributions;
+
+      document.getElementById("totalContributions").value = totalContributions.toFixed(2);
+      document.getElementById("taxableIncome").innerText = `Php${taxableIncome.toFixed(2)}`;
+    }
+
+    function clearForm() {
+      document.getElementById("salary").value = "";
+      document.getElementById("sss").value = "";
+      document.getElementById("philhealth").value = "";
+      document.getElementById("pagibig").value = "";
+      document.getElementById("totalContributions").value = "";
+      document.getElementById("taxableIncome").innerText = "Php0.00";
+  
+    const taxOutput = document.getElementById("taxOutput");
+        if (taxOutput) {
+        taxOutput.innerText = "Estimated Tax: Php0.00";
+        }
+    }   
+  </script>
+</body>
+</html>
